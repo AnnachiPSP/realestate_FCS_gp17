@@ -1,0 +1,10 @@
+.form-style{
+    height: 450px;
+    padding: 20px 30px 20px;
+    text-align: center;
+}
+
+.blue-link{
+    color: blue;
+    text-decoration: underline;
+}
