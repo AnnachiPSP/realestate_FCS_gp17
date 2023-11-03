@@ -4,8 +4,8 @@ import AdminNavbar from '../adminnavbar'
 function ReportedList() {
   return (
     <>
-        <AdminNavbar />
-        <div>ReportedList</div>
+      <AdminNavbar />
+      <div>ReportedList</div>
     </>
   )
 }

@@ -10,16 +10,18 @@ function PostedProperties() {
     return (
       <>
         <Navbar />
-        <div>
-            <h3>FOR SALE</h3>
-            <p>Location: <em>Somewhere</em></p>
-            <p>Property Type: <em>Something</em></p>
-            <p>Coast: <em>$$</em></p>
-            <p>EMI: <em>$$</em></p>
-            <br />
-            <p>Buyer: <em>{buyer !== null ? buyer : 'None'}</em></p>
-            <br />
-            <hr />
+        <div className='container'>
+          <div>
+              <h3>FOR SALE</h3>
+              <p>Location: <em>Somewhere</em></p>
+              <p>Property Type: <em>Something</em></p>
+              <p>Coast: <em>$$</em></p>
+              <p>EMI: <em>$$</em></p>
+              <br />
+              <p>Buyer: <em>{buyer !== null ? buyer : 'None'}</em></p>
+              <br />
+              <hr />
+          </div>
         </div>
       </>
     )
@@ -28,14 +30,16 @@ function PostedProperties() {
       return (
         <>
           <Navbar />
-          <div>
-              <h3>FOR LEASE</h3>
-              <p>Location: <em>Somewhere</em></p>
-              <p>Property Type: <em>Something</em></p>
-              <p>Rent: <em>$$</em></p>
-              <p>Deposit: <em>$$</em></p>
-              <br />
-              <hr />
+          <div className='container'>
+            <div>
+                <h3>FOR LEASE</h3>
+                <p>Location: <em>Somewhere</em></p>
+                <p>Property Type: <em>Something</em></p>
+                <p>Rent: <em>$$</em></p>
+                <p>Deposit: <em>$$</em></p>
+                <br />
+                <hr />
+            </div>
           </div>
         </>
       )
