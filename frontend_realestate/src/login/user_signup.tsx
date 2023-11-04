@@ -21,9 +21,10 @@ function UserSignUp() {
         <br />
         <button type="submit" className="btn btn-primary">Submit</button>
         <br />
-        <a href="/user/login" className="blue-link">Do you have an account ?</a>
+        <br></br>
+        <a href="/login" className="blue-link">Already a User</a>
         <br />
-        <a href="/admin/login" className="blue-link">ADMIN?</a>
+        {/* <a href="/admin/login" className="blue-link">ADMIN?</a> */}
       </form>
     </div>
   </div>

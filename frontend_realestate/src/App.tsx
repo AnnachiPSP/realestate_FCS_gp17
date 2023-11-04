@@ -19,29 +19,29 @@ import AdminDocuments from './admin/admindocs';
 const App = () => {
 
   const adminLogin = true;
-  const userLogin = true;
+  const userLogin = false;
 
   return (
     <Router>
         <Routes>
           {/* Authentication Routes */}
-          <Route path="/" element={userLogin ? <Navigate to = "/:user/home" /> : <Navigate to = "/user/login" />} />
+          <Route path="/" element={userLogin ? <Navigate to = "/:user/home" /> : <Navigate to = "/login" />} />
           <Route path="/admin/home" element={adminLogin ? <AdminPage /> : <Navigate to = "/admin/login" />} />
 
           {/* Admin Routes */}
           <Route path="/admin/reported" element={<ReportedList />} />
-          <Route path="/admin/login" element={<AdminLogin />} />
+          <Route path="/admin" element={<AdminLogin />} />
           <Route path="/admin/docs" element={<AdminDocuments />} />
 
           {/* User Routes */}
-          <Route path="/user/login" element={<UserLogin />} />
-          <Route path="/:user/home" element={<UserPage />} />
-          <Route path="/user/signup" element={<UserSignUp />} />
-          <Route path="/:user/postppty" element={<PostProperty />}/>
-          <Route path="/:user/payments" element={<Payments />} />
-          <Route path="/:user/wishlist" element={<WishList />} />
-          <Route path="/:user/postedppty" element={<PostedProperties />}/>
-          <Route path="/:user/bookings" element={<Bookings />} />
+          <Route path="/login" element={<UserLogin />} />
+          <Route path="/home" element={<UserPage />} />
+          <Route path="/signup" element={<UserSignUp />} />
+          <Route path="/postppty" element={<PostProperty />}/>
+          <Route path="/payments" element={<Payments />} />
+          <Route path="/wishlist" element={<WishList />} />
+          <Route path="/postedppty" element={<PostedProperties />}/>
+          <Route path="/bookings" element={<Bookings />} />
         </Routes>
     </Router>
   )
