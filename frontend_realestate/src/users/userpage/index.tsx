@@ -25,7 +25,7 @@ function UserPage() {
   return (
     <>
       < Navbar />
-      <div className = "container">
+      <div style={{ marginLeft: '10px' }}>
       <form>
         <div>   
           <input type="radio" className="btn-check" name="options-outlined" id="buying" autocomplete="off" checked />
