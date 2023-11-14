@@ -1,10 +1,10 @@
 import React from 'react'
 import AdminNavbar from '../adminnavbar'
 
-function AdminDocuments() {
+const AdminDocuments = ({ adminLogin, setAdminLogin }) => {
   return (
     <>
-        <AdminNavbar />
+        <AdminNavbar adminLogin={adminLogin} setAdminLogin={setAdminLogin}/>
         <div>AdminDocuments</div>
     </>
   )

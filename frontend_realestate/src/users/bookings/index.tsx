@@ -1,10 +1,10 @@
 import React from 'react'
 import Navbar from '../navbar'
 
-function Bookings() {
+const Bookings = ({ userLogin, setUserLogin, userName, setUserName }) => {
   return (
     <div>
-        <Navbar />
+        <Navbar userLogin={userLogin} setUserLogin={setUserLogin} userName={userName} setUserName={setUserName}/>
         <div>Bookings</div>
     </div>
   )

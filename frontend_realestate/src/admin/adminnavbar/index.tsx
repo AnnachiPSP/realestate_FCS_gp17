@@ -1,6 +1,15 @@
-import React from 'react'
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
-function AdminNavbar() {
+const AdminNavbar = ({ adminLogin, setAdminLogin }) => {
+
+    const navigate = useNavigate()
+
+    const handleSignOut = () => {
+        setAdminLogin(false)
+        navigate('/admin/login')
+    }
+
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
         <div className="container-fluid">
@@ -15,6 +24,9 @@ function AdminNavbar() {
                     </li>
                     <li className="nav-item">
                         <a className="nav-link" href="/admin/docs">Documents</a>
+                    </li>
+                    <li className="nav-item">
+                        <button className="btn btn-outline-primary" onClick={handleSignOut}>SignOut</button>
                     </li>
                 </ul>
             </div>

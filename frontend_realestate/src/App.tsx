@@ -1,7 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, Navigate} from 'react-router-dom';
 import { useState, useEffect } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 import AdminPage from './admin/adminpage';
 import PostedProperties from './users/postedproperties';
@@ -18,30 +16,31 @@ import AdminDocuments from './admin/admindocs';
 
 const App = () => {
 
-  const adminLogin = true;
-  const userLogin = true;
+  const [adminLogin, setAdminLogin] = useState(false);
+  const [userLogin, setUserLogin] = useState(false);
+  const [userName, setUserName] = useState("");
 
   return (
     <Router>
         <Routes>
           {/* Authentication Routes */}
           <Route path="/" element={userLogin ? <Navigate to = "/:user/home" /> : <Navigate to = "/user/login" />} />
-          <Route path="/admin/home" element={adminLogin ? <AdminPage /> : <Navigate to = "/admin/login" />} />
+          <Route path="/admin/home" element={adminLogin ? <AdminPage adminLogin={adminLogin} setAdminLogin={setAdminLogin}/> : <Navigate to = "/admin/login" />} />
 
           {/* Admin Routes */}
-          <Route path="/admin/reported" element={<ReportedList />} />
-          <Route path="/admin/login" element={<AdminLogin />} />
-          <Route path="/admin/docs" element={<AdminDocuments />} />
+          <Route path="/admin/reported" element={<ReportedList adminLogin={adminLogin} setAdminLogin={setAdminLogin}/>} />
+          <Route path="/admin/login" element={<AdminLogin adminLogin={adminLogin} setAdminLogin={setAdminLogin}/>} />
+          <Route path="/admin/docs" element={<AdminDocuments adminLogin={adminLogin} setAdminLogin={setAdminLogin}/>} />
 
           {/* User Routes */}
-          <Route path="/user/login" element={<UserLogin />} />
-          <Route path="/:user/home" element={<UserPage />} />
-          <Route path="/user/signup" element={<UserSignUp />} />
-          <Route path="/:user/postppty" element={<PostProperty />}/>
-          <Route path="/:user/payments" element={<Payments />} />
-          <Route path="/:user/wishlist" element={<WishList />} />
-          <Route path="/:user/postedppty" element={<PostedProperties />}/>
-          <Route path="/:user/bookings" element={<Bookings />} />
+          <Route path="/user/login" element={<UserLogin userLogin={userLogin} setUserLogin={setUserLogin} userName={userName} setUserName={setUserName}/>} />
+          <Route path="/:user/home" element={<UserPage userLogin={userLogin} setUserLogin={setUserLogin} userName={userName} setUserName={setUserName}/>} />
+          <Route path="/user/signup" element={<UserSignUp userLogin={userLogin} setUserLogin={setUserLogin} userName={userName} setUserName={setUserName}/>} />
+          <Route path="/:user/postppty" element={<PostProperty userLogin={userLogin} setUserLogin={setUserLogin} userName={userName} setUserName={setUserName}/>}/>
+          <Route path="/:user/payments" element={<Payments userLogin={userLogin} setUserLogin={setUserLogin} userName={userName} setUserName={setUserName}/>} />
+          <Route path="/:user/wishlist" element={<WishList userLogin={userLogin} setUserLogin={setUserLogin} userName={userName} setUserName={setUserName}/>} />
+          <Route path="/:user/postedppty" element={<PostedProperties userLogin={userLogin} setUserLogin={setUserLogin} userName={userName} setUserName={setUserName}/>}/>
+          <Route path="/:user/bookings" element={<Bookings userLogin={userLogin} setUserLogin={setUserLogin} userName={userName} setUserName={setUserName}/>} />
         </Routes>
     </Router>
   )
