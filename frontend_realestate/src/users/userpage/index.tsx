@@ -24,15 +24,26 @@ const UserPage = ( {userLogin, setUserLogin, userName, setUserName} ) => {
 
   return (
     <>
+<<<<<<< HEAD
       < Navbar userLogin={userLogin} setUserLogin={setUserLogin} userName={userName} setUserName={setUserName} />
       <div className = "container">
+=======
+      < Navbar />
+      <div style={{ marginLeft: '10px' }}>
+>>>>>>> 4f6d319c7d94ec2d8a3ed4ddd677391b50058152
       <form>
         <div>   
           <input type="radio" className="btn-check" name="options-outlined" id="buying" autocomplete="off" checked onClick={() => setSellingType("Buy")}/>
           <label className="btn btn-outline-primary me-2" htmlFor="buying">BUY</label>
+<<<<<<< HEAD
           <input type="radio" className="btn-check" name="options-outlined" id="renting" autocomplete="off" onClick={() => setSellingType("Rent")}/>
           <label className="btn btn-outline-primary" htmlFor="renting">RENT</label>
+=======
+          <input type="radio" className="btn-check" name="options-outlined" id="renting" autocomplete="off"/>
+          <label className="btn btn-outline-primary" htmlFor="renting" style={{ marginLeft: '10px' }}>RENT</label>
+>>>>>>> 4f6d319c7d94ec2d8a3ed4ddd677391b50058152
         </div>
+        <div style={{ marginTop: '10px' }}></div>
         <div className="input-group input-group-lg ipclass">
           <span className="input-group-text" >Location</span>
           <input type="text" className="form-control" value={loc} onChange={(e) => {setLoc(e.target.value)}}/>
@@ -50,8 +61,11 @@ const UserPage = ( {userLogin, setUserLogin, userName, setUserName} ) => {
           </select>
         </div>
       </form>
+<<<<<<< HEAD
       <button className="btn btn-primary" onClick={handleSubmit}>Search</button>
       <br /><br /><br />
+=======
+>>>>>>> 4f6d319c7d94ec2d8a3ed4ddd677391b50058152
       <hr />
       {data !== null && data != 0 ? (
         data

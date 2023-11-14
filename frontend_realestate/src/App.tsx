@@ -16,14 +16,20 @@ import AdminDocuments from './admin/admindocs';
 
 const App = () => {
 
+<<<<<<< HEAD
   const [adminLogin, setAdminLogin] = useState(false);
   const [userLogin, setUserLogin] = useState(false);
   const [userName, setUserName] = useState("");
+=======
+  const adminLogin = true;
+  const userLogin = false;
+>>>>>>> 4f6d319c7d94ec2d8a3ed4ddd677391b50058152
 
   return (
     <Router>
         <Routes>
           {/* Authentication Routes */}
+<<<<<<< HEAD
           <Route path="/" element={userLogin ? <Navigate to = "/:user/home" /> : <Navigate to = "/user/login" />} />
           <Route path="/admin/home" element={adminLogin ? <AdminPage adminLogin={adminLogin} setAdminLogin={setAdminLogin}/> : <Navigate to = "/admin/login" />} />
 
@@ -41,6 +47,25 @@ const App = () => {
           <Route path="/:user/wishlist" element={<WishList userLogin={userLogin} setUserLogin={setUserLogin} userName={userName} setUserName={setUserName}/>} />
           <Route path="/:user/postedppty" element={<PostedProperties userLogin={userLogin} setUserLogin={setUserLogin} userName={userName} setUserName={setUserName}/>}/>
           <Route path="/:user/bookings" element={<Bookings userLogin={userLogin} setUserLogin={setUserLogin} userName={userName} setUserName={setUserName}/>} />
+=======
+          <Route path="/" element={userLogin ? <Navigate to = "/:user/home" /> : <Navigate to = "/login" />} />
+          <Route path="/admin/home" element={adminLogin ? <AdminPage /> : <Navigate to = "/admin/login" />} />
+
+          {/* Admin Routes */}
+          <Route path="/admin/reported" element={<ReportedList />} />
+          <Route path="/admin" element={<AdminLogin />} />
+          <Route path="/admin/docs" element={<AdminDocuments />} />
+
+          {/* User Routes */}
+          <Route path="/login" element={<UserLogin />} />
+          <Route path="/home" element={<UserPage />} />
+          <Route path="/signup" element={<UserSignUp />} />
+          <Route path="/postppty" element={<PostProperty />}/>
+          <Route path="/payments" element={<Payments />} />
+          <Route path="/wishlist" element={<WishList />} />
+          <Route path="/postedppty" element={<PostedProperties />}/>
+          <Route path="/bookings" element={<Bookings />} />
+>>>>>>> 4f6d319c7d94ec2d8a3ed4ddd677391b50058152
         </Routes>
     </Router>
   )

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './style.css';
+import { Link } from 'react-router-dom';
 
 const UserLogin = ({ userLogin, setUserLogin, userName, setUserName }) => {
 
@@ -51,11 +52,20 @@ const UserLogin = ({ userLogin, setUserLogin, userName, setUserName }) => {
             <input type="password" className="form-control my-2" placeholder='Password' value={pass} onChange={(e) => setPass(e.target.value)}/>
           </div>
           <br />
+<<<<<<< HEAD
           <a href="/user/signup" className="blue-link">Not a user yet?</a>
           <br />
           <a href="/admin/login" className="blue-link">ADMIN??</a>
           <br />
           <br />
+=======
+          <Link to="/home" className="btn btn-primary">Submit</Link>
+          <br />
+          <br />
+          <a href="/signup" className="blue-link">Not a user yet?</a>
+          <br />
+          <a href="/admin" className="blue-link">ADMIN??</a>
+>>>>>>> 4f6d319c7d94ec2d8a3ed4ddd677391b50058152
         </form>
         <button type="submit" className="btn btn-primary" onClick={handleSubmit}>Submit</button>
       </div>
