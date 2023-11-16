@@ -5,7 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import './style.css';
 import { Link } from 'react-router-dom';
 
-const UserLogin = ({ userLogin, setUserLogin, userName, setUserName }) => {
+const UserLogin = ({ userName, setUserName }) => {
 
   const navigate = useNavigate();
 
@@ -25,12 +25,22 @@ const UserLogin = ({ userLogin, setUserLogin, userName, setUserName }) => {
       });
     
     if(data != 0){
-      console.log(data);
       if(pass == data.UserPassword){
-        setUserLogin(true);
+        // setUserLogin(true);
         setUserName(name);
-        navigate(`/${name}/home`);
-        console.log("Lexx goo!")
+
+        //sending otp request
+        fetch('http://localhost:8000/generate_otp/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            name: name,
+          }),
+        });
+
+        navigate(`/${name}/otpvalid`);
       } else {
         toast("Wrong Password!")
       }
@@ -52,20 +62,11 @@ const UserLogin = ({ userLogin, setUserLogin, userName, setUserName }) => {
             <input type="password" className="form-control my-2" placeholder='Password' value={pass} onChange={(e) => setPass(e.target.value)}/>
           </div>
           <br />
-<<<<<<< HEAD
           <a href="/user/signup" className="blue-link">Not a user yet?</a>
           <br />
           <a href="/admin/login" className="blue-link">ADMIN??</a>
           <br />
           <br />
-=======
-          <Link to="/home" className="btn btn-primary">Submit</Link>
-          <br />
-          <br />
-          <a href="/signup" className="blue-link">Not a user yet?</a>
-          <br />
-          <a href="/admin" className="blue-link">ADMIN??</a>
->>>>>>> 4f6d319c7d94ec2d8a3ed4ddd677391b50058152
         </form>
         <button type="submit" className="btn btn-primary" onClick={handleSubmit}>Submit</button>
       </div>

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const AdminLogin = ({ adminLogin, setAdminLogin }) => {
+const AdminLogin = () => {
 
   const navigate = useNavigate();
 
@@ -25,9 +25,19 @@ const AdminLogin = ({ adminLogin, setAdminLogin }) => {
     if(data != 0){
       console.log(data);
       if(pass == data.AdminPass){
-        setAdminLogin(true);
-        navigate('/admin/home');
-        console.log("Lexx goo!")
+
+        //sending otp request
+        fetch('http://localhost:8000/generate_otp/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            name: name,
+          }),
+        });
+
+        navigate('/admin/otpvalid');
       } else {
         toast("Wrong Password!")
       }

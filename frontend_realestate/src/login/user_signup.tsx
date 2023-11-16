@@ -64,15 +64,6 @@ const UserSignUp = ({ userLogin, setUserLogin, userName, setUserName }) => {
           <input type="password" className="form-control my-2" placeholder='Confirm Password' value={repass} onChange={(e) => {setRePass(e.target.value)}}/>
         </div>
         <br />
-<<<<<<< HEAD
-=======
-        <button type="submit" className="btn btn-primary">Submit</button>
-        <br />
-        <br></br>
-        <a href="/login" className="blue-link">Already a User</a>
-        <br />
-        {/* <a href="/admin/login" className="blue-link">ADMIN?</a> */}
->>>>>>> 4f6d319c7d94ec2d8a3ed4ddd677391b50058152
       </form>
       <button onClick={handleSubmit} className="btn btn-primary">Submit</button>
       <br />

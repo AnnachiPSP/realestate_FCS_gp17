@@ -41,7 +41,6 @@ const PostProperty = ({ userLogin, setUserLogin, userName, setUserName }) => {
         })
             .then((res) => res.json())
             .then((data) => {
-                console.log(data);
                 toast("Property Posted")
             })
             .catch((error) => {
@@ -72,7 +71,7 @@ const PostProperty = ({ userLogin, setUserLogin, userName, setUserName }) => {
                         <select className="form-select" value={pptytype} onChange={(e) => {setPptyType(e.target.value)}}>
                             <option selected>Choose...</option>
                             <option value="Full House">Full House</option>
-                            <option value="PGorHostel">PG/Hostel</option>
+                            <option value="PGorHostel">PGorHostel</option>
                             <option value="Condos">Condos</option>
                             <option value="Restaurants">Restaurants</option>
                             <option value="Offices">Offices</option>
