@@ -7,7 +7,7 @@
 ### To run the front end 
 
 - Firstly run `git clone` and then after youredirect to the root folder, run `cd frontend_realestate`
-- Secondly `npm run dev`
+- Secondly run `npm i` followed by `npm run dev`
 
 ### To run the backend
 
