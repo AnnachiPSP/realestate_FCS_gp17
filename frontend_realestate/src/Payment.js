@@ -211,7 +211,6 @@ function validatePastedCardNumber(event) {
             console.error('Error reading clipboard data:', error);
         });
     } else {
-        // Fallback for browsers that do not support the Clipboard API
         const pasteData = event.clipboardData.getData('text');
         validateCardNumber(event, pasteData);
     }
@@ -367,26 +366,6 @@ function clearModal() {
     getElementByID('card-icon-update').src = "credit-card.png";
 }
 
-// function getSavedCardDetails() {
-//     savedCards = JSON.parse(localStorage.getItem('CARD_INFO'));
-    
-//     document.getElementById('modal-container').style["display"] = "block";
-//     let listcontainer = document.getElementById("saved-card-list");
-    
-//     document.getElementById("no-cards").innerHTML = "";
-
-//     listcontainer.innerHTML = '';
-    
-//     if(savedCards.length == 0) {
-//        document.getElementById("no-cards").innerHTML = "No Saved Cards";
-//        return;
-//     }
-   
-//     savedCards.forEach((element, index) => { 
-//         const card_colors = CARDS_INFO[element.cardType].CARD_COLOR;
-//         listcontainer.innerHTML += '<li> <div class="list-container" style="background-image: linear-gradient('+card_colors[0]+','+card_colors[1]+'" onclick=selectCard('+ index +')><div class="card-title">'+element.cardName+'</div><div class="card-number">'+element.cardNumber+'</div> <div class="card-type"><img class="" src='+CARDS_INFO[element.cardType].ICON+'></div></div> <button type="button" class="btn-delete" onclick="deleteCardDetails('+index+')">Delete Card</button> </li>'
-//     })
-// }
 function getSavedCardDetails() {
     savedCards = JSON.parse(localStorage.getItem('CARD_INFO'));
 
@@ -413,7 +392,6 @@ function getSavedCardDetails() {
         </div>
         <button type="button" class="btn-delete">Delete Card</button>`;
 
-        // Attach event listeners dynamically
         cardItem.querySelector('.list-container').addEventListener('click', () => selectCard(index));
         cardItem.querySelector('.btn-delete').addEventListener('click', () => deleteCardDetails(index));
 
