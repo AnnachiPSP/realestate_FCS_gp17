@@ -44,6 +44,12 @@ const Payment = () => {
                             <input type="text" id="cardname" placeholder="ENTER CARD NAME" />
                         </div>
                     </div>
+                    <div className="row">
+                        <div className="input-container">
+                            <label>Amount</label>
+                            <input type="text" id="amount" onKeyDown={checkDigit} onKeyUp={validateAmount} placeholder="ENTER AMOUNT TO PAY" required />
+                        </div>
+                    </div>
                     <p id="showErrorMsg" className="error-message"></p>
                     <div className="form-container">
                         <button type="button" className="btn-submit" onClick={saveCardDetails}>CONTINUE</button>
@@ -124,7 +130,8 @@ const ERROR_MSG = {
     "CARDNAME_REQUIRED" : "Please enter card name",
     "EXPIRY_INVALID" : "Invalid expiry date",
     "CVV_INVALID" : "Invalid CVV",
-    "CARDNUMBER_INVALID" : "Invalid Card Number"
+    "CARDNUMBER_INVALID" : "Invalid Card Number",
+    "AMOUNT_REQUIRED" : "Please enter Valid amount"
 }
 let savedCards = [];
 let localStorage = window.localStorage;
@@ -239,6 +246,18 @@ function validateCVV(jumpToNextInput) {
      return false;
 }
 
+function validateAmount() {
+    const amountInput = document.getElementById('amount');
+    const amountValue = parseFloat(amountInput.value);
+
+    if (isNaN(amountValue) || amountValue <= 0) {
+        return false;
+    }
+
+    showErrorMsg("");
+    return true;
+}
+
 function checkDigit(event) {
     var code = (event.which) ? event.which : event.keyCode;
 
@@ -259,6 +278,10 @@ function validateForm() {
     }
     if(!validateCVV()) {
         showErrorMsg(ERROR_MSG.CVV_INVALID);
+        return false;
+    }
+    if(!validateAmount()) {
+        showErrorMsg(ERROR_MSG.AMOUNT_REQUIRED);
         return false;
     }
     return true;
@@ -310,7 +333,7 @@ function saveCardDetails() {
    if(!savedCards) savedCards = [];
    savedCards.push(obj);
    localStorage.setItem('CARD_INFO', JSON.stringify(savedCards)); 
-   showSuccessMsg("Card Details updated successfully");
+   showSuccessMsg("Card Details Saved and Amount Paid Successfully");
    clearModal();
 }
 function selectCard(pos) {
@@ -340,29 +363,64 @@ function clearModal() {
     getElementByID('expirydate').value = "";
     getElementByID('cvv').value = "";
     getElementByID('cardname').value = "";
+    getElementByID('amount').value = "";
     getElementByID('card-icon-update').src = "credit-card.png";
 }
 
+// function getSavedCardDetails() {
+//     savedCards = JSON.parse(localStorage.getItem('CARD_INFO'));
+    
+//     document.getElementById('modal-container').style["display"] = "block";
+//     let listcontainer = document.getElementById("saved-card-list");
+    
+//     document.getElementById("no-cards").innerHTML = "";
+
+//     listcontainer.innerHTML = '';
+    
+//     if(savedCards.length == 0) {
+//        document.getElementById("no-cards").innerHTML = "No Saved Cards";
+//        return;
+//     }
+   
+//     savedCards.forEach((element, index) => { 
+//         const card_colors = CARDS_INFO[element.cardType].CARD_COLOR;
+//         listcontainer.innerHTML += '<li> <div class="list-container" style="background-image: linear-gradient('+card_colors[0]+','+card_colors[1]+'" onclick=selectCard('+ index +')><div class="card-title">'+element.cardName+'</div><div class="card-number">'+element.cardNumber+'</div> <div class="card-type"><img class="" src='+CARDS_INFO[element.cardType].ICON+'></div></div> <button type="button" class="btn-delete" onclick="deleteCardDetails('+index+')">Delete Card</button> </li>'
+//     })
+// }
 function getSavedCardDetails() {
     savedCards = JSON.parse(localStorage.getItem('CARD_INFO'));
-    
+
     document.getElementById('modal-container').style["display"] = "block";
     let listcontainer = document.getElementById("saved-card-list");
-    
+
     document.getElementById("no-cards").innerHTML = "";
 
     listcontainer.innerHTML = '';
-    
-    if(savedCards.length == 0) {
-       document.getElementById("no-cards").innerHTML = "No Saved Cards";
-       return;
+
+    if (savedCards.length === 0) {
+        document.getElementById("no-cards").innerHTML = "No Saved Cards";
+        return;
     }
-   
-    savedCards.forEach((element, index) => { 
+
+    savedCards.forEach((element, index) => {
         const card_colors = CARDS_INFO[element.cardType].CARD_COLOR;
-        listcontainer.innerHTML += '<li> <div class="list-container" style="background-image: linear-gradient('+card_colors[0]+','+card_colors[1]+'" onclick=selectCard('+ index +')><div class="card-title">'+element.cardName+'</div><div class="card-number">'+element.cardNumber+'</div> <div class="card-type"><img class="" src='+CARDS_INFO[element.cardType].ICON+'></div></div> <button type="button" class="btn-delete" onclick="deleteCardDetails('+index+')">Delete Card</button> </li>'
-    })
+        const cardItem = document.createElement('li');
+
+        cardItem.innerHTML = `<div class="list-container" style="background-image: linear-gradient(${card_colors[0]},${card_colors[1]})">
+            <div class="card-title">${element.cardName}</div>
+            <div class="card-number">${element.cardNumber}</div>
+            <div class="card-type"><img class="" src=${CARDS_INFO[element.cardType].ICON}></div>
+        </div>
+        <button type="button" class="btn-delete">Delete Card</button>`;
+
+        // Attach event listeners dynamically
+        cardItem.querySelector('.list-container').addEventListener('click', () => selectCard(index));
+        cardItem.querySelector('.btn-delete').addEventListener('click', () => deleteCardDetails(index));
+
+        listcontainer.appendChild(cardItem);
+    });
 }
+
 
 function deleteCardDetails(pos) {
     let confirm = window.confirm("You are deleting this card from Saved Card list. Are you sure...???")
