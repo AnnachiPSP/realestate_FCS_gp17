@@ -2,6 +2,7 @@ import {useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import bcrypt from 'bcryptjs';
 
 const UserSignUp = ({ userLogin, setUserLogin, userName, setUserName }) => {
 
@@ -12,13 +13,21 @@ const UserSignUp = ({ userLogin, setUserLogin, userName, setUserName }) => {
 
   const navigate = useNavigate();
 
-  const handleSubmit = () => {
+  const hashPassword = async (password) => {
+    const saltRounds = 10;
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
+    return hashedPassword;
+  };
+
+  const handleSubmit = async () => {
     if(name != "null" && mail != "null" && pass != "null" && repass != "null"){
       if(pass == repass){
+        const hashedPassword = await hashPassword(pass);
+
         const user = {
           UserName : name,
           UserMail : mail,
-          UserPassword : pass
+          UserPassword : hashedPassword,
         }
 
         fetch('http://127.0.0.1:8000/userdetail', {

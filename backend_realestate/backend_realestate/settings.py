@@ -80,6 +80,13 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'backend_realestate.wsgi.application'
 
+#Authentication
+AUTH_USER_MODEL = 'auth.User'
+
+# SECURE_SSL_REDIRECT = True
+# SESSION_COOKIE_SECURE = True
+# CSRF_COOKIE_SECURE = True
+
 
 # Database
 # Please change the MySQL db connections settings accordingly
@@ -89,7 +96,7 @@ pymysql.install_as_MySQLdb()
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'temp',
+        'NAME': 'new',
 		'USER': 'root',
 		'PASSWORD': '1234',
 		'HOST': 'localhost',
@@ -105,7 +112,7 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587 
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'kushtommer@gmail.com'
-EMAIL_HOST_PASSWORD = 'tbaq ymwt fqgq isng'
+EMAIL_HOST_PASSWORD = 'euef duks xxyh vsik'
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators

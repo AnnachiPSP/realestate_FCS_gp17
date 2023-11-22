@@ -5,7 +5,7 @@ class UsersDetails(models.Model):
 	UserId = models.AutoField(primary_key=True)
 	UserName = models.CharField(max_length=500)
 	UserMail = models.EmailField(unique=True, max_length=500)
-	UserPassword = models.CharField(max_length=50)
+	UserPassword = models.CharField(max_length=5000)
 	PostedProperties = models.IntegerField(default=0)
 	RentedProperties = models.IntegerField(default=0)
 	BoughtProperties = models.IntegerField(default=0)
