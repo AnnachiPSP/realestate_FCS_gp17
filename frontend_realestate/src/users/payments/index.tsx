@@ -21,7 +21,7 @@ const Payments = () => {
                 <div className="card-details-container">
                     <div className="row">
                         <div className="input-container">
-                            <label>CARD NUMBER</label>
+                            <label>YOUR CARD NUMBER</label>
                             <input type="text" id="creditno" onKeyDown={checkDigit} onKeyUp={validateCardNumber} placeholder="XXXX XXXX XXXX XXXX" onPaste={(event) => validatePastedCardNumber(event)} maxLength="19" />
                         </div>
                     </div>
@@ -42,6 +42,18 @@ const Payments = () => {
                         <div className="input-container">
                             <label>CARD NAME</label>
                             <input type="text" id="cardname" placeholder="ENTER CARD NAME" />
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="input-container">
+                            <label>Payee Name</label>
+                            <input type="text" id="payee-name" placeholder="ENTER PAYEE NAME" />
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="input-container">
+                            <label>Payee Card Number</label>
+                            <input type="text" id="payee-cardno" onKeyDown={checkDigit} onKeyUp={validatePayeeCardNumber} placeholder="XXXX XXXX XXXX XXXX" maxLength="19" />
                         </div>
                     </div>
                     <div className="row">
@@ -126,11 +138,14 @@ const CARDS_INFO = {
 const ERROR_MSG = {
     "EXPIRY_REQUIRED" : "Please enter expiry date",
     "CVV_REQUIRED" : "Please enter CVV",
-    "CARDNUMBER_REQUIRED" : "Please enter card number",
-    "CARDNAME_REQUIRED" : "Please enter card name",
+    "CARDNUMBER_REQUIRED" : "Please enter your Card number",
+    "CARDNAME_REQUIRED" : "Please enter Card name",
     "EXPIRY_INVALID" : "Invalid expiry date",
     "CVV_INVALID" : "Invalid CVV",
     "CARDNUMBER_INVALID" : "Invalid Card Number",
+    "PAYEE_NAME_REQUIRED" : "Please enter Payee name",
+    "PAYEE_CARDNUMBER_REQUIRED" : "Please enter Payee Card number",
+    "PAYEE_CARDNUMBER_INVALID" : "Invalid Payee Card Number",
     "AMOUNT_REQUIRED" : "Please enter Valid amount"
 }
 let savedCards = [];
@@ -203,6 +218,32 @@ function validateCardNumber(event, val, jumpToNextInput) {
     return validated;
 }
 
+function validatePayeeCardNumber(event, val, jumpToNextInput) {
+    // console.log("object", CARDS_INFO.VISA.ICON);
+    let validated = false;
+    let cardType;
+    let ele = document.getElementById('payee-cardno');
+    
+    if(!val) {
+        val = ele.value.split(' ').join('');
+    }
+    
+    ele.value = formatCardNumber(val);
+
+    const cardInfoArray = Object.entries(CARDS_INFO);
+
+    for(let i=0;i<cardInfoArray.length;i++) {
+        cardType = cardInfoArray[i][0];
+        let cardInfo = cardInfoArray[i][1];
+        if(val.match(cardInfo.REGEX)) {
+            console.log("true", cardInfo);
+            validated = true;
+            break;
+        }
+    }
+    return validated;
+}
+
 function validatePastedCardNumber(event) {
     if (navigator.clipboard) {
         navigator.clipboard.readText().then((pasteData) => {
@@ -271,6 +312,14 @@ function validateForm() {
          showErrorMsg(ERROR_MSG.CARDNUMBER_INVALID);
          return false;
     }
+    if(!validatePayeeCardNumber()) {
+        showErrorMsg(ERROR_MSG.PAYEE_CARDNUMBER_INVALID);
+        return false;
+    }
+    if (document.getElementById('creditno').value === document.getElementById('payee-cardno').value) {
+        showErrorMsg("Your Card number and Payee card number cannot be the same");
+        return false;
+    }
     if(!validateExpiry()) {
         showErrorMsg(ERROR_MSG.EXPIRY_INVALID);
         return false;
@@ -288,52 +337,62 @@ function validateForm() {
 
 
 function saveCardDetails() {
-   let isValidated;
-   
-   let cardNumber = getDataByID('creditno');
-   let expiry = getDataByID('expirydate');
-   let cvv = getDataByID('cvv');
-   let cardName = getDataByID('cardname');
-   
-
-   if(!cardNumber) {
-       showErrorMsg(ERROR_MSG.CARDNUMBER_REQUIRED);
-       return;
-   } 
-   if(!expiry) {
-       showErrorMsg(ERROR_MSG.EXPIRY_REQUIRED);
-       return;
-   } 
-   if(!cvv) {
-       showErrorMsg(ERROR_MSG.CVV_REQUIRED);
-       return;
-   }
-   if(!cardName) {
-       showErrorMsg(ERROR_MSG.CARDNAME_REQUIRED);
-       return;
-   }
-
-   isValidated = validateForm();
-   if(!isValidated) return;
-
-   showErrorMsg("");
-
-   let cardType = getDataByID('card-icon-update');
-
-   const obj = {
-       cardNumber,
-       expiry,
-       cvv,
-       cardType,
-       cardName
-   }
-
-   savedCards = JSON.parse(localStorage.getItem('CARD_INFO'));
-   if(!savedCards) savedCards = [];
-   savedCards.push(obj);
-   localStorage.setItem('CARD_INFO', JSON.stringify(savedCards)); 
-   showSuccessMsg("Card Details Saved and Amount Paid Successfully");
-   clearModal();
+    let isValidated;
+    
+    let cardNumber = getDataByID('creditno');
+    let expiry = getDataByID('expirydate');
+    let cvv = getDataByID('cvv');
+    let cardName = getDataByID('cardname');
+    let payeeName = getDataByID('payee-name');
+    let payeeCardNumber = getDataByID('payee-cardno');
+    
+ 
+    if(!cardNumber) {
+        showErrorMsg(ERROR_MSG.CARDNUMBER_REQUIRED);
+        return;
+    } 
+    if(!expiry) {
+        showErrorMsg(ERROR_MSG.EXPIRY_REQUIRED);
+        return;
+    } 
+    if(!cvv) {
+        showErrorMsg(ERROR_MSG.CVV_REQUIRED);
+        return;
+    }
+    if(!cardName) {
+        showErrorMsg(ERROR_MSG.CARDNAME_REQUIRED);
+        return;
+    }
+    if (!payeeName) {
+        showErrorMsg(ERROR_MSG.PAYEE_NAME_REQUIRED);
+        return;
+    }
+    if (!payeeCardNumber) {
+        showErrorMsg(ERROR_MSG.PAYEE_CARDNUMBER_REQUIRED);
+        return;
+    }
+ 
+    isValidated = validateForm();
+    if(!isValidated) return;
+ 
+    showErrorMsg("");
+ 
+    let cardType = getDataByID('card-icon-update');
+ 
+    const obj = {
+        cardNumber,
+        expiry,
+        cvv,
+        cardType,
+        cardName
+    }
+ 
+    savedCards = JSON.parse(localStorage.getItem('CARD_INFO'));
+    if(!savedCards) savedCards = [];
+    savedCards.push(obj);
+    localStorage.setItem('CARD_INFO', JSON.stringify(savedCards)); 
+    showSuccessMsg("Card Details Saved and Amount Paid Successfully");
+    clearModal();
 }
 function selectCard(pos) {
     let selectedCard = savedCards[pos];
@@ -363,6 +422,8 @@ function clearModal() {
     getElementByID('cvv').value = "";
     getElementByID('cardname').value = "";
     getElementByID('amount').value = "";
+    getElementByID('payee-name').value = "";
+    getElementByID('payee-cardno').value = "";
     getElementByID('card-icon-update').src = "/credit-card.png";
 }
 
