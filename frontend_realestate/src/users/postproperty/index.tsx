@@ -69,7 +69,7 @@ const PostProperty = ({ userLogin, setUserLogin, userName, setUserName }) => {
                     <div className="input-group input-group-lg mb-3">
                         <label className="input-group-text">Property Type</label>
                         <select className="form-select" value={pptytype} onChange={(e) => {setPptyType(e.target.value)}}>
-                            <option selected>Choose...</option>
+                            {/* <option selected>Choose...</option> */}
                             <option value="Full House">Full House</option>
                             <option value="PGorHostel">PGorHostel</option>
                             <option value="Condos">Condos</option>
@@ -80,7 +80,7 @@ const PostProperty = ({ userLogin, setUserLogin, userName, setUserName }) => {
                     </div>
                     <div className="form-floating mb-2">
                         <input type="number" className="form-control" id="floatingTextarea" placeholder="Caost" value={val1} onChange={(e) => {setVal1(e.target.value)}}/>
-                        <label htmlFor="floatingTextarea">Coast</label>
+                        <label htmlFor="floatingTextarea">Cost</label>
                     </div>      
                     <div className="form-floating">
                         <input type="number" className="form-control" id="floatingTextarea" placeholder='Emi' value={val2} onChange={(e) => {setVal2(e.target.value)}}/>
@@ -117,7 +117,7 @@ const PostProperty = ({ userLogin, setUserLogin, userName, setUserName }) => {
                 <div className="input-group input-group-lg mb-3">
                     <label className="input-group-text">Property Type</label>
                     <select className="form-select" value={pptytype} onChange={(e) => {setPptyType(e.target.value)}}>
-                        <option selected>Choose...</option>
+                        {/* <option selected>Choose...</option> */}
                         <option value="Full House">Full House</option>
                         <option value="PG/Hostel">PG/Hostel</option>
                         <option value="Condos">Condos</option>

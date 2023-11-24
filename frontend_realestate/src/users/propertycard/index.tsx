@@ -113,7 +113,7 @@ function PropertyCard({ppty, userName}) {
                 <p>Property Owner: <em>{ppty.user}</em></p>
                 <p>Location: <em>{ppty.location}</em></p>
                 <p>Property Type: <em>{ppty.property_type}</em></p>
-                <p>Coast: <em>{ppty.coast}</em></p>
+                <p>Cost: <em>{ppty.coast}</em></p>
                 <p>EMI: <em>{ppty.emi}</em></p>
                 <br />
                 <div className="btn-group">
