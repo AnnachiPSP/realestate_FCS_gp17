@@ -35,7 +35,7 @@ const Payments = () => {
                             <input type="password" id="cvv" className="input_cvv" placeholder="CVV" onKeyUp={validateCVV} />
                         </div>
                         <div className="input-container">
-                            <img id="card-icon-update" className="card-icon" src="credit-card.png" />
+                            <img id="card-icon-update" className="card-icon" src="/credit-card.png" />
                         </div>
                     </div>
                     <div className="row">
@@ -63,7 +63,7 @@ const Payments = () => {
             <div id="modal-container" className="modal" style={{ display: 'none' }}>
                 <div className="overlay">
                     <div className="modal-content">
-                        <div className="close-icon" onClick={closeModal}><img src="close.png" alt="Close Icon" /></div>
+                        <div className="close-icon" onClick={closeModal}><img src="/close.png" alt="Close Icon" /></div>
                         <ul id="saved-card-list">
                             {/* Add your saved card list here */}
                         </ul>
@@ -83,42 +83,42 @@ const CARDS_INFO = {
         CARDNAME : "Visa",
         REGEX : "^4[0-9]{12}(?:[0-9]{3})?$",
         CARDLENGTH : 16,
-        ICON : "visa.png",
+        ICON : "/visa.png",
         CARD_COLOR: ["#5d4148","#d8a1b8"]
     },
     MASTER : {
         CARDNAME : "MasterCard",
         REGEX : "^(?:5[1-5][0-9]{2}|222[1-9]|22[3-9][0-9]|2[3-6][0-9]{2}|27[01][0-9]|2720)[0-9]{12}$",
         CARDLENGTH : 16,
-        ICON : "master.png",
+        ICON : "/master.png",
         CARD_COLOR: ["#264b6b","#777657"]
     },
     AMEX : {
         CARDNAME : "American Express",
         REGEX : "^3[47][0-9]{13}$",
         CARDLENGTH : 15,
-        ICON : "amex.png",
+        ICON : "/amex.png",
         CARD_COLOR: ["#b50b1b","#171302"]
     },
     DINERS : {
         CARDNAME : "Diners Club",
         REGEX : "^3(?:0[0-5]|[68][0-9])[0-9]{11}$",
         CARDLENGTH : 16,
-        ICON : "diners-club.png",
+        ICON : "/diners-club.png",
         CARD_COLOR: ["#443032","#d8a1b8"]
     },
     DISCOVER : {
         CARDNAME : "Discover",
         REGEX : "^6(?:011|5[0-9]{2})[0-9]{12}$",
         CARDLENGTH : 16,
-        ICON : "discover.png",
+        ICON : "/discover.png",
         CARD_COLOR: ["#0a7154","#88b59c"]
     },
     JCB : {
         CARDNAME: "JCB",
         REGEX : "^(?:2131|1800|35\d{3})\d{11}$",
         CARDLENGTH:16,
-        ICON : "jcb.png",
+        ICON : "/jcb.png",
         CARD_COLOR: ["#08610f","#bbd6d5"]
     }
 }
@@ -363,7 +363,7 @@ function clearModal() {
     getElementByID('cvv').value = "";
     getElementByID('cardname').value = "";
     getElementByID('amount').value = "";
-    getElementByID('card-icon-update').src = "credit-card.png";
+    getElementByID('card-icon-update').src = "/credit-card.png";
 }
 
 function getSavedCardDetails() {
