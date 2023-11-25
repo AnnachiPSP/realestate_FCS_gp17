@@ -96,11 +96,11 @@ pymysql.install_as_MySQLdb()
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'new',
-		'USER': 'root',
-		'PASSWORD': '1234',
-		'HOST': 'localhost',
-		'PORT': '3306',
+        'NAME': os.getenv('DB_NAME'),
+		'USER': os.getenv('DB_USER'),
+		'PASSWORD': os.getenv('DB_PASSWORD'),
+		'HOST': os.getenv('DB_HOST'),
+		'PORT': os.getenv('DB_PORT'),
     }
 }
 
@@ -111,8 +111,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587 
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'kushtommer@gmail.com'
-EMAIL_HOST_PASSWORD = 'euef duks xxyh vsik'
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators

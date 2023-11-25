@@ -10,6 +10,7 @@ const UserSignUp = ({ userLogin, setUserLogin, userName, setUserName }) => {
   const [mail, SetMail] = useState("")
   const [pass, setPass] = useState("")
   const [repass, setRePass] = useState("")
+  const [data, setData] = useState(null);
 
   const navigate = useNavigate();
 
@@ -39,14 +40,26 @@ const UserSignUp = ({ userLogin, setUserLogin, userName, setUserName }) => {
         })
           .then((response) => response.json())
           .then((data) => {
-            console.log(data);
+            setData(data);
             setUserName(name);
-            setUserLogin(true);
-            navigate(`/${name}/home`);
           })
           .catch((error) => {
             console.error('Error:', error);
           });
+
+        if(data != 0){
+          fetch('http://localhost:8000/generate_otp/', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              name: name,
+            }),
+          });
+
+          navigate(`/${name}/otpvalid`);
+        }
       } else {
         toast("Password not matching");
       }

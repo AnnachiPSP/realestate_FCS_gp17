@@ -91,7 +91,7 @@ def  userApi(request, id=0):
         if user_serializer.is_valid():
             user_serializer.save()
             return JsonResponse("Added successfully!!", safe=False)
-        return JsonResponse("Failed to Add", safe=False)
+        return JsonResponse(0, safe=False)
     
     elif request.method=='PUT':
         user_data = JSONParser().parse(request)
